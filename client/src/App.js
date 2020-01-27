@@ -48,6 +48,7 @@ function App() {
   }, [isUpdating, onHoldTargetTemperature, targetTemperature]);
 
   useEffect(() => {
+
       clearInterval(updateInterval.current);
       const fetchJson = (async () => {
           updateInterval.current = setInterval(async() => {
@@ -66,6 +67,8 @@ function App() {
       });
 
       fetchJson();
+
+      return () => {clearInterval(updateInterval.current)};
   }, [setCurrentTemperature, onHoldTargetTemperature, makeFetchUpdate])
 
   const updateTargetTemperature = (change) => {
